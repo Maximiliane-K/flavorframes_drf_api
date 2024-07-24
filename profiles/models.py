@@ -1,13 +1,15 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
+from location_field.models.plain import PlainLocationField
 
 class Profile(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     screenname = models.CharField(max_length=150, unique=True)
-    location = models.CharField(max_length=255, blank=True)
+    city = models.CharField(max_length=100, default='Unknown')
+    location = PlainLocationField(based_fields=['city'], zoom=5)
     about = models.TextField(blank=True)
     profile_picture = models.ImageField(upload_to="images/", default="../default_profile_govdhn")
 

@@ -22,6 +22,7 @@ class ProfileDetail(APIView):
     """
     Retrieve, update, or delete a profile if you are the owner.
     """
+    serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_object(self, pk):
