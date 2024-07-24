@@ -12,6 +12,7 @@ class Profile(models.Model):
     location = PlainLocationField(based_fields=['city'], zoom=5)
     about = models.TextField(blank=True)
     profile_picture = models.ImageField(upload_to="images/", default="../default_profile_govdhn")
+    is_owner = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["-created_at"]
