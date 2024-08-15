@@ -1,54 +1,24 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from django.http import Http404
+from rest_framework import generics, permissions
 from .models import Profile
 from .serializers import ProfileSerializer
+from flavorframes_drf_api.permissions import IsOwnerOrReadOnly
 
-class ProfileList(APIView):
+class ProfileList(generics.ListAPIView):
     """
     List all profiles.
     No create view as profile creation is handled by django signals.
     """
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    def get(self, request):
-        profiles = Profile.objects.all()
-        serializer = ProfileSerializer(profiles, many=True)
-        return Response(serializer.data)
-
-class ProfileDetail(APIView):
+class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve, update, or delete a profile if you are the owner.
     """
+    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
 
-    def get_object(self, pk):
-        try:
-            return Profile.objects.get(pk=pk)
-        except Profile.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk):
-        profile = self.get_object(pk)
-        serializer = ProfileSerializer(profile, context={'request': request})
-        return Response(serializer.data)
-
-    def put(self, request, pk):
-        profile = self.get_object(pk)
-        if profile.owner != request.user:
-            return Response(status=status.HTTP_403_FORBIDDEN)
-        serializer = ProfileSerializer(profile, data=request.data, context={'request': request})
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, pk):
-        profile = self.get_object(pk)
-        if profile.owner != request.user:
-            return Response(status=status.HTTP_403_FORBIDDEN)
-        profile.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    def perform_update(self, serializer):
+        serializer.save(owner=self.request.user)
