@@ -9,7 +9,10 @@ class FollowSerializer(serializers.ModelSerializer):
     """
 
     follower = serializers.ReadOnlyField(source='follower.username')
-    following = serializers.ReadOnlyField(source='following.username')
+    following = serializers.SlugRelatedField(
+        slug_field='username',
+        queryset=User.objects.all()
+    )
 
     class Meta:
         model = Follow
