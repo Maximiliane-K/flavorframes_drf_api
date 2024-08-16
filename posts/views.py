@@ -1,16 +1,23 @@
-from rest_framework import generics, permissions
-from rest_framework.exceptions import PermissionDenied
+from rest_framework import generics, permissions, filters
+from django.db.models import Count
 from .models import Post
 from .serializers import PostSerializer
 
 class PostList(generics.ListCreateAPIView):
     """
-    List and create post when logged in.
-    To associate logged in user with post the perform_create method is used.
+    List and create posts when logged in.
+    To associate logged-in user with post, the perform_create method is used.
     """
-    queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['comments_count', 'likes_count', 'liked_by__timestamp']
+
+    def get_queryset(self):
+        return Post.objects.annotate(
+            comments_count=Count('comment', distinct=True),
+            likes_count=Count('liked_by', distinct=True) 
+        ).order_by('-created_at')
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -19,9 +26,14 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve and edit post if you are the owner.
     """
-    queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        return Post.objects.annotate(
+            comments_count=Count('comment', distinct=True),
+            likes_count=Count('liked_by', distinct=True)  
+        ).order_by('-created_at')
 
     def perform_update(self, serializer):
         if self.get_object().owner != self.request.user:
