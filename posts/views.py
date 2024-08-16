@@ -10,8 +10,9 @@ class PostList(generics.ListCreateAPIView):
     """
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    filter_backends = [filters.OrderingFilter]
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['comments_count', 'likes_count', 'liked_by__timestamp']
+    search_fields = ['owner__username', 'content']
 
     def get_queryset(self):
         return Post.objects.annotate(
