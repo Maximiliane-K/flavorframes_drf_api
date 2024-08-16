@@ -1,24 +1,39 @@
-from rest_framework import generics, permissions
+from django.db.models import Count
+from rest_framework import generics, filters
+from flavorframes_drf_api.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
-from flavorframes_drf_api.permissions import IsOwnerOrReadOnly
 
 class ProfileList(generics.ListAPIView):
     """
     List all profiles.
     No create view as profile creation is handled by django signals.
     """
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        posts_count=Count('owner__post', distinct=True),
+        followers_count=Count('owner__user_followed_by', distinct=True),
+        following_count=Count('owner__user_follows', distinct=True)
+    ).order_by('-created_at')
     serializer_class = ProfileSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [
+        filters.OrderingFilter
+    ]
+    ordering_fields = [
+        'posts_count',
+        'followers_count',
+        'following_count',
+        'owner__user_follows__followed_at',
+        'owner__user_followed_by__followed_at',
+    ]
 
-class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
-    Retrieve, update, or delete a profile if you are the owner.
+    Retrieve or update a profile if you're the owner.
     """
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
-
-    def perform_update(self, serializer):
-        serializer.save(owner=self.request.user)
+    queryset = Profile.objects.annotate(
+        posts_count=Count('owner__post', distinct=True),
+        followers_count=Count('owner__user_followed_by', distinct=True),
+        following_count=Count('owner__user_follows', distinct=True)
+    ).order_by('-created_at')
+    serializer_class = ProfileSerializer
