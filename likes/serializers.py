@@ -9,10 +9,18 @@ class LikeSerializer(serializers.ModelSerializer):
     """
 
     user = serializers.ReadOnlyField(source='user.username')
+    like_id = serializers.SerializerMethodField()
 
     class Meta:
         model = Like
-        fields = ['id', 'timestamp', 'user', 'post']
+        fields = ['id', 'timestamp', 'user', 'post', 'like_id']
+
+    def get_like_id(self, obj):
+        request = self.context.get('request', None)
+        if request and request.user.is_authenticated:
+            like = Like.objects.filter(user=request.user, post=obj.post).first()
+            return like.id if like else None
+        return None
 
     def create(self, validated_data):
         try:
