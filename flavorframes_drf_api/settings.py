@@ -37,7 +37,7 @@ SECRET_KEY = 'django-insecure-w(jy94o8xgt&zz4fnmehbl3#n7@a=7*wb-h8nfp%b=%b!t3dv%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-maximiliane-flavorframe-7fit46yyu29.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = ['8000-maximiliane-flavorframe-v1ua77rb3z8.ws.codeinstitute-ide.net']
 CSRF_TRUSTED_ORIGINS = ['https://8000-maximiliane-flavorframe-7fit46yyu29.ws.codeinstitute-ide.net']
 
 
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'rest_framework',
+    'django_filters',
 
     'profiles',
     'posts',

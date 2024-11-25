@@ -1,5 +1,6 @@
 from rest_framework import generics, permissions, filters
 from django.db.models import Count
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Post
 from .serializers import PostSerializer
 
@@ -10,9 +11,10 @@ class PostList(generics.ListCreateAPIView):
     """
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter, DjangoFilterBackend]
     ordering_fields = ['comments_count', 'likes_count', 'liked_by__timestamp']
     search_fields = ['owner__username', 'content']
+    filterset_fields = ['owner', 'liked_by__user','owner__user_followed_by__follower']
 
     def get_queryset(self):
         return Post.objects.annotate(
