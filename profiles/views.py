@@ -22,6 +22,7 @@ class ProfileList(generics.ListAPIView):
     ]
     filterset_fields = [
         'owner__user_followed_by__following',
+        'owner__user_follows__following',
     ]
     ordering_fields = [
         'posts_count',
