@@ -9,7 +9,6 @@ class LikeListViewTests(APITestCase):
     """
     Tests for the Like model list view
     """
-
     def setUp(self):
         self.maxi = User.objects.create_user(username="maxi", password="pass")
         self.ben = User.objects.create_user(username="ben", password="pass")
@@ -33,7 +32,6 @@ class LikeDetailViewTests(APITestCase):
     """
     Tests for the Like model detail view
     """
-
     def setUp(self):
         self.maxi = User.objects.create_user(username="maxi", password="pass")
         self.ben = User.objects.create_user(username="ben", password="pass")

@@ -9,7 +9,6 @@ class CommentListViewTests(APITestCase):
     """
     Tests for the Comment model list view
     """
-
     def setUp(self):
         self.maxi = User.objects.create_user(username="maxi", password="pass")
         self.post = Post.objects.create(owner=self.maxi, content="A post content")
@@ -26,7 +25,6 @@ class CommentDetailViewTests(APITestCase):
     """
     Tests for the Comment model detail view
     """
-
     def setUp(self):
         self.maxi = User.objects.create_user(username="maxi", password="pass")
         self.ben = User.objects.create_user(username="ben", password="pass")

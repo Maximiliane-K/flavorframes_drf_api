@@ -5,6 +5,9 @@ from rest_framework.test import APITestCase
 from rest_framework.exceptions import PermissionDenied
 
 class PostListViewTests(APITestCase):
+    """
+    Tests for the Profile model list view
+    """
     def setUp(self):
         User.objects.create_user(username="maxi", password="pass")
 
@@ -25,6 +28,9 @@ class PostListViewTests(APITestCase):
 
 
 class PostDetailViewTests(APITestCase):
+    """
+    Tests for the Profile model detail view
+    """
     def setUp(self):
         self.maxi = User.objects.create_user(username="maxi", password="pass")
         self.ben = User.objects.create_user(username="ben", password="pass")
