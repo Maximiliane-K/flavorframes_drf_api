@@ -8,7 +8,6 @@ class ProfileListViewTests(APITestCase):
     """
     Tests for the Profile model list view
     """
-
     def setUp(self):
         self.maxi = User.objects.create_user(username="maxi", password="pass")
         self.ben = User.objects.create_user(username="ben", password="pass")
@@ -32,7 +31,6 @@ class ProfileDetailViewTests(APITestCase):
     """
     Tests for the Profile model detail view
     """
-
     def setUp(self):
         self.maxi = User.objects.create_user(username="maxi", password="pass")
         self.ben = User.objects.create_user(username="ben", password="pass")
