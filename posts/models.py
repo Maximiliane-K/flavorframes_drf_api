@@ -10,7 +10,9 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     content = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to='images/', default='../default_post_ne57tp', blank=True
+        upload_to='images/', 
+        default='media/images/default_post_u8igak.jpg', 
+        blank=True
     )
     location_link = models.URLField(
         max_length=200, 
