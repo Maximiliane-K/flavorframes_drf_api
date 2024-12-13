@@ -11,7 +11,7 @@ class Post(models.Model):
     content = models.TextField(blank=True)
     image = models.ImageField(
         upload_to='images/', 
-        default='media/images/default_post_u8igak.jpg', 
+        default='images/default_post_u8igak', 
         blank=True
     )
     location_link = models.URLField(

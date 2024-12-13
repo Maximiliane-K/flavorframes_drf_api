@@ -11,7 +11,11 @@ class Profile(models.Model):
     city = models.CharField(max_length=100, default='Unknown')
     location = PlainLocationField(based_fields=['city'], zoom=5)
     about = models.TextField(blank=True)
-    profile_picture = models.ImageField(upload_to="images/", default="media/images/default_profile_govdhn")
+    profile_picture = models.ImageField(
+        upload_to="images/", 
+        default="images/default_profile_qx7eqz"
+    )
+
     is_owner = models.BooleanField(default=False)
 
     class Meta:
