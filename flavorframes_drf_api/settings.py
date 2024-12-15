@@ -20,6 +20,19 @@ CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
 }
 
+LOCATION_FIELD = {
+    'provider.google': {
+        'api_key': os.environ.get('GOOGLE_MAPS_API_KEY'),
+    },
+
+    'resources.media': {  
+        'js': [
+            'https://maps.googleapis.com/maps/api/js?key={}&libraries=places'.format(os.environ.get('GOOGLE_MAPS_API_KEY'))
+        ]
+    }
+}
+
+
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
@@ -54,6 +67,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'rest_framework',
     'django_filters',
+    'location_field',
 
     'profiles',
     'posts',
