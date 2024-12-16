@@ -25,7 +25,7 @@ class FollowSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("You cannot follow yourself.")
 
         #Validation to check for duplicate follow relationships
-        if Follow.objects.filter(follower=request.user, following=data.get('following')).exists:
+        if Follow.objects.filter(follower=request.user, following=data.get('following')).exists():
             raise serializers.ValidationError("You already are following this user.")
 
         return data
