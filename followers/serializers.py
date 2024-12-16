@@ -20,6 +20,13 @@ class FollowSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         request = self.context.get('request')
+        #Validation to check if user is trying to follow themselves
         if request and request.user == data.get('following'):
             raise serializers.ValidationError("You cannot follow yourself.")
+
+        #Validation to check for duplicate follow relationships
+        if Follow.objects.filter(follower=request.user, following=data.get('following')).exists:
+            raise serializers.ValidationError("You already are following this user.")
+
         return data
+
