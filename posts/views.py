@@ -1,3 +1,4 @@
+from rest_framework.exceptions import PermissionDenied
 from rest_framework import generics, permissions, filters
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend

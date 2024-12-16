@@ -32,7 +32,7 @@ class ProfileList(generics.ListAPIView):
         'owner__user_followed_by__followed_at',
     ]
 
-class ProfileDetail(generics.RetrieveUpdateAPIView):
+class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve or update a profile if you're the owner.
     """
