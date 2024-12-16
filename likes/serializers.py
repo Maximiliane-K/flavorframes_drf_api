@@ -22,8 +22,8 @@ class LikeSerializer(serializers.ModelSerializer):
             return like.id if like else None
         return None
 
-    def create(self, validated_data):
-        try:
-            return super().create(validated_data)
-        except IntegrityError:
-            raise serializers.ValidationError({'error': 'Duplicate like detected'})
+    def validate(self, data):
+        #Check for duplicate likes
+        if Like.objects.filter(user=self.context['request'].user, post=data['post']).exists():
+            raise serializers.ValidationError({'You have already liked this post.'})
+        return data
