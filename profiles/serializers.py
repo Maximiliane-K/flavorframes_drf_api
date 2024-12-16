@@ -5,7 +5,6 @@ from django.db.models import Count
 
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-    location = serializers.CharField()
     is_owner = serializers.SerializerMethodField()
     following_id = serializers.SerializerMethodField()
     posts_count = serializers.IntegerField(read_only=True)
@@ -32,7 +31,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = [
             'id', 'owner', 'created_at', 'updated_at', 'screenname',
-            'city', 'location', 'about', 'profile_picture', 'is_owner',
+            'city', 'about', 'profile_picture', 'is_owner',
             'following_id', 'posts_count', 'followers_count', 'following_count'
         ]
         read_only_fields = ['id', 'owner', 'created_at', 'updated_at']

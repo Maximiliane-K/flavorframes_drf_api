@@ -9,7 +9,6 @@ class Profile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     screenname = models.CharField(max_length=150, unique=True)
     city = models.CharField(max_length=100, default='Unknown')
-    location = PlainLocationField(based_fields=['city'], zoom=5)
     about = models.TextField(blank=True)
     profile_picture = models.ImageField(
         upload_to="images/", 
