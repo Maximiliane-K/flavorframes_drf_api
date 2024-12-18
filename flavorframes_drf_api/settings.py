@@ -77,7 +77,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = ['8000-maximiliane-flavorframe-55e4ndtsb7v.ws.codeinstitute-ide.net', 'localhost', 'flavorframes-drf-api.herokuapp.com']
-CSRF_TRUSTED_ORIGINS = ['https://8000-maximiliane-flavorframe-55e4ndtsb7v.ws.codeinstitute-ide.net']
+CSRF_TRUSTED_ORIGINS = ['https://8000-maximiliane-flavorframe-55e4ndtsb7v.ws.codeinstitute-ide.net', 'https://flavorframes-drf-api.herokuapp.com']
 
 
 # Application definition
