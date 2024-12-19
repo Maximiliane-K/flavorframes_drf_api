@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import re
 import dj_database_url
 
 if os.path.exists('env.py'):
@@ -76,9 +77,31 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['8000-maximiliane-flavorframe-utvtjjsisrg.ws.codeinstitute-ide.net', 'localhost', 'flavorframes-drf-api.herokuapp.com', 'flavorframes-drf-api-571215953f7d.herokuapp.com']
-CSRF_TRUSTED_ORIGINS = ['https://8000-maximiliane-flavorframe-55e4ndtsb7v.ws.codeinstitute-ide.net', 'https://flavorframes-drf-api.herokuapp.com', 'https://flavorframes-drf-api-571215953f7d.herokuapp.com/']
+ALLOWED_HOSTS = [
+    os.environ.get('ALLOWED_HOST'),
+    '8000-maximiliane-flavorframe-utvtjjsisrg.ws.codeinstitute-ide.net', 
+    'localhost',
+    ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-maximiliane-flavorframe-55e4ndtsb7v.ws.codeinstitute-ide.net',
+    'https://flavorframes-drf-api-571215953f7d.herokuapp.com/'
+    ]
+
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
+
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    extracted_url = re.match(
+        r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE
+    ).group(0)
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+    ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
