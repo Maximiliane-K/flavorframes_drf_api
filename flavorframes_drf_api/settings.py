@@ -80,12 +80,14 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOST'),
     '8000-maximiliane-flavorframe-utvtjjsisrg.ws.codeinstitute-ide.net', 
+    '8000-maximiliane-flavorframe-xi1kpxh2vpv.ws.codeinstitute-ide.net',
     'localhost',
     ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://8000-maximiliane-flavorframe-55e4ndtsb7v.ws.codeinstitute-ide.net',
-    'https://flavorframes-drf-api-571215953f7d.herokuapp.com/'
+    'https://8000-maximiliane-flavorframe-xi1kpxh2vpv.ws.codeinstitute-ide.net',
+    'https://flavorframes-drf-api-571215953f7d.herokuapp.com/',
     ]
 
 if 'CLIENT_ORIGIN' in os.environ:
