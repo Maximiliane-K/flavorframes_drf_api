@@ -87,27 +87,13 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     'https://8000-maximiliane-flavorframe-55e4ndtsb7v.ws.codeinstitute-ide.net',
     'https://8000-maximiliane-flavorframe-xi1kpxh2vpv.ws.codeinstitute-ide.net',
-    'https://flavorframes-drf-api-571215953f7d.herokuapp.com/',
+    'https://flavorframes-drf-api-571215953f7d.herokuapp.com',
     ]
-
-if 'CLIENT_ORIGIN' in os.environ:
-    CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-    ]
-
-if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(
-        r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE
-    ).group(0)
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
-    ]
-
-CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,7 +106,6 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken', 
     'dj_rest_auth', 
-    'corsheaders',
     'django.contrib.sites', 
     'allauth', 
     'allauth.account', 
@@ -149,14 +134,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if 'CLIENT_ORIGIN' in os.environ:
-    CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-    ]
-else:
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://.*\.gitpod\.io$",
-    ]
+CORS_ALLOWED_ORIGINS = [
+    "https://3000-maximiliane-flavorframe-wo9v0qzx4tt.ws.codeinstitute-ide.net",
+    "https://flavorframes-drf-api-571215953f7d.herokuapp.com",
+]
     
 CORS_ALLOW_CREDENTIALS = True
 
