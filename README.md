@@ -13,6 +13,8 @@ Users can create, update, and delete posts featuring images, written description
 
 To enhance the experience, the API also includes search and filtering capabilities, making it easier to discover posts that match individual tastes and interests.
 
+You can view the live API [here](https://flavorframes-drf-api-571215953f7d.herokuapp.com/).
+
 ## **Table Of Contents**
 * [User Experience](#user-experience)
   * [Strategy Plane](#strategy-plane)
