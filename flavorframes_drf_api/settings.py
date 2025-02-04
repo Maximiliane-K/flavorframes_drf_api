@@ -29,8 +29,10 @@ LOCATION_FIELD = {
 
     'resources.media': {  
         'js': [
-            'https://maps.googleapis.com/maps/api/js?key={}&libraries=places'
-            .format(os.environ.get('GOOGLE_MAPS_API_KEY'))
+            (
+            f'https://maps.googleapis.com/maps/api/js?'
+            f'key={os.environ.get("GOOGLE_MAPS_API_KEY")}&libraries=places'
+            )
         ]
     }
 }
@@ -66,7 +68,9 @@ JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
-REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER': 'flavorframes_drf_api.serializers.CurrentUserSerializer'}
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'flavorframes_drf_api.serializers.CurrentUserSerializer'
+}
 
 
 # Quick-start development settings - unsuitable for production
@@ -134,16 +138,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-# if 'CLIENT_ORIGIN' in os.environ:
-#     CORS_ALLOWED_ORIGINS = [
-#         os.environ.get('CLIENT_ORIGIN')
-# ]
-
-# if 'CLIENT_ORIGIN_DEV' in os.environ:
-#     CORS_ALLOWED_ORIGIN_REGEXES = [
-#         os.environ.get('CLIENT_ORIGIN_DEV', ''),
-# ]
 
 CORS_ALLOWED_ORIGINS = [os.environ.get("CLIENT_ORIGIN")]
 
