@@ -86,6 +86,7 @@ ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOST'),
     '8000-maximiliane-flavorframe-utvtjjsisrg.ws.codeinstitute-ide.net', 
     '8000-maximiliane-flavorframe-xi1kpxh2vpv.ws.codeinstitute-ide.net',
+    'flavorframes-drf-api-571215953f7d.herokuapp.com',
     'localhost',
     ]
 
