@@ -83,17 +83,14 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
-    os.environ.get('ALLOWED_HOST'),
-    '8000-maximiliane-flavorframe-utvtjjsisrg.ws.codeinstitute-ide.net', 
-    '8000-maximiliane-flavorframe-xi1kpxh2vpv.ws.codeinstitute-ide.net',
-    'flavorframes-drf-api-571215953f7d.herokuapp.com',
-    'localhost',
-    ]
+    "flavorframes-drf-api-571215953f7d.herokuapp.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-maximiliane-flavorframe-55e4ndtsb7v.ws.codeinstitute-ide.net',
-    'https://8000-maximiliane-flavorframe-xi1kpxh2vpv.ws.codeinstitute-ide.net',
-    'https://flavorframes-drf-api-571215953f7d.herokuapp.com',
+    'https://flavorframes-drf-api-571215953f7d.herokuapp.com', 
+    '127.0.0.1'
     ]
 
 # Application definition
@@ -141,9 +138,11 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    os.environ.get("CLIENT_ORIGIN", "http://localhost:3000"),  
-    os.environ.get("CLIENT_ORIGIN_PRODUCTION", "https://flavorframes-ec3ead3959ab.herokuapp.com"),  
+    "http://localhost:3000",
+    "https://flavorframes-ec3ead3959ab.herokuapp.com",
 ]
+
+
 
 ROOT_URLCONF = 'flavorframes_drf_api.urls'
 
