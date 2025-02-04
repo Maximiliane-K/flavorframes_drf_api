@@ -139,9 +139,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [os.environ.get("CLIENT_ORIGIN")]
-
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get("CLIENT_ORIGIN", "http://localhost:3000"),  
+    os.environ.get("CLIENT_ORIGIN_PRODUCTION", "https://flavorframes-ec3ead3959ab.herokuapp.com"),  
+]
 
 ROOT_URLCONF = 'flavorframes_drf_api.urls'
 
