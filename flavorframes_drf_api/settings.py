@@ -29,7 +29,8 @@ LOCATION_FIELD = {
 
     'resources.media': {  
         'js': [
-            'https://maps.googleapis.com/maps/api/js?key={}&libraries=places'.format(os.environ.get('GOOGLE_MAPS_API_KEY'))
+            'https://maps.googleapis.com/maps/api/js?key={}&libraries=places'
+            .format(os.environ.get('GOOGLE_MAPS_API_KEY'))
         ]
     }
 }
@@ -45,7 +46,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [( 
         'rest_framework.authentication.SessionAuthentication' 
-        if 'DEV' in os.environ 
+        if 'DEV' in os.environ
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     )],
      'DEFAULT_PAGINATION_CLASS':  'rest_framework.pagination.PageNumberPagination',
@@ -134,11 +135,18 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://3000-maximiliane-flavorframe-wo9v0qzx4tt.ws.codeinstitute-ide.net",
-    "https://flavorframes-drf-api-571215953f7d.herokuapp.com",
-]
-    
+# if 'CLIENT_ORIGIN' in os.environ:
+#     CORS_ALLOWED_ORIGINS = [
+#         os.environ.get('CLIENT_ORIGIN')
+# ]
+
+# if 'CLIENT_ORIGIN_DEV' in os.environ:
+#     CORS_ALLOWED_ORIGIN_REGEXES = [
+#         os.environ.get('CLIENT_ORIGIN_DEV', ''),
+# ]
+
+CORS_ALLOWED_ORIGINS = [os.environ.get("CLIENT_ORIGIN")]
+
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'flavorframes_drf_api.urls'
@@ -176,7 +184,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-    
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
