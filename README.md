@@ -36,12 +36,20 @@ You can view the live API [here](https://flavorframes-drf-api-571215953f7d.herok
   * [Content](#content)
       
   ---
-
-## User Experience
-
-### Strategy Plane
+  
+## Strategy Plane
 
 #### Agile Project Management
+
+This project was managed using agile methodologies, focusing on incremental feature delivery and iterative development. 
+
+The backend work was structured into six epics, guiding the development process, and managed across four sprints to ensure an organized workflow.
+
+The Kanban board and Project board can be viewed [here](https://github.com/users/Maximiliane-K/projects/14/views/2?layout=table&visibleFields=%5B%22Title%22%2C%22Assignees%22%2C%22Status%22%2C%22Labels%22%2C%22Milestone%22%5D).
+
+![Kanban board image](https://res.cloudinary.com/maxiscloud/image/upload/v1738670509/kanban-board-flavorframes_rbfw70.png)
+
+![Project board image](https://res.cloudinary.com/maxiscloud/image/upload/v1738671974/project-board-flavorframes_gxdwvx.png)
 
 #### Developer User Stories
 
@@ -107,11 +115,11 @@ You can view the live API [here](https://flavorframes-drf-api-571215953f7d.herok
 
 - DUS 25 View All Bookmarks: As a developer or superuser, I can access a list of all bookmark objects so that I can review and manage bookmarked posts in the API.
 
-### Structure Plane
+## Structure Plane
 
 #### **Features**
 
-### Skeleton Plane
+## Skeleton Plane
 
 #### **Database Shema**
 
