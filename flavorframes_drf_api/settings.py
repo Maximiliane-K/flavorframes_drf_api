@@ -89,9 +89,10 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://flavorframes-drf-api-571215953f7d.herokuapp.com', 
-    '127.0.0.1'
-    ]
+    "http://localhost:3000",
+    "https://flavorframes-ec3ead3959ab.herokuapp.com",
+]
+
 
 # Application definition
 
@@ -142,7 +143,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://flavorframes-ec3ead3959ab.herokuapp.com",
 ]
 
-
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'flavorframes_drf_api.urls'
 
