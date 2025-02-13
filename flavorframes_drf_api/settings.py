@@ -140,6 +140,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://flavorframes-ec3ead3959ab.herokuapp.com"
     "https://flavorframes-ec3ead3959ab.herokuapp.com",
 ]
 
