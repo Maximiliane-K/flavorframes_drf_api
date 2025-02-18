@@ -36,7 +36,11 @@ class PostSerializer(serializers.ModelSerializer):
             like = Like.objects.filter(user=request.user, post=obj)
             return like.first().id if like.exists() else None
         return None
-
+    
+    def get_is_owner(self, obj):
+        request = self.context["request"]
+        return request.user == obj.owner
+        
     def validate_image(self, value):
         if value.size > 1024 * 1024 * 2:
             raise serializers.ValidationError('Image size larger than 2MB!')
