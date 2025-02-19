@@ -10,6 +10,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     posts_count = serializers.IntegerField(read_only=True)
     followers_count = serializers.IntegerField(read_only=True)
     following_count = serializers.IntegerField(read_only=True)
+    profile_image = serializers.ReadOnlyField(source="profile_picture.url")
 
     def get_is_owner(self, obj):
         request = self.context.get('request')
@@ -31,7 +32,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = [
             'id', 'owner', 'created_at', 'updated_at', 'screenname',
-            'city', 'about', 'profile_picture', 'is_owner',
+            'city', 'about', 'profile_image', 'is_owner',
             'following_id', 'posts_count', 'followers_count', 'following_count'
         ]
         read_only_fields = ['id', 'owner', 'created_at', 'updated_at']
