@@ -10,7 +10,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     posts_count = serializers.IntegerField(read_only=True)
     followers_count = serializers.IntegerField(read_only=True)
     following_count = serializers.IntegerField(read_only=True)
-    profile_image = serializers.ReadOnlyField(source="profile_picture.url")
+    profile_image = serializers.ImageField(source="profile_picture", required=False)
 
     def get_is_owner(self, obj):
         request = self.context.get('request')
