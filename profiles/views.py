@@ -1,6 +1,7 @@
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, filters
+from rest_framework.response import Response
 from flavorframes_drf_api.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
@@ -8,7 +9,7 @@ from .serializers import ProfileSerializer
 class ProfileList(generics.ListAPIView):
     """
     List all profiles.
-    No create view as profile creation is handled by django signals.
+    No create view as profile creation is handled by Django signals.
     """
     queryset = Profile.objects.annotate(
         posts_count=Count('owner__post', distinct=True),
@@ -43,3 +44,23 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
         following_count=Count('owner__user_follows', distinct=True)
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
+
+    def update(self, request, *args, **kwargs):
+        """
+        Custom update method to ensure profile_picture is updated correctly.
+        """
+        print("Received FILES:", request.FILES)
+
+        instance = self.get_object()
+        data = request.data.copy()
+
+        if "profile_picture" in request.FILES:
+            instance.profile_picture = request.FILES["profile_picture"]
+
+        response = super().update(request, *args, **kwargs)
+
+        instance.city = data.get("city", instance.city)
+        instance.about = data.get("about", instance.about)
+        instance.save()
+
+        return response
