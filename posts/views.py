@@ -15,7 +15,7 @@ class PostList(generics.ListCreateAPIView):
     filter_backends = [filters.OrderingFilter, filters.SearchFilter, DjangoFilterBackend]
     ordering_fields = ['comments_count', 'likes_count', 'liked_by__timestamp']
     search_fields = ['owner__username', 'content']
-    filterset_fields = ['owner', 'owner_profile', 'liked_by__user','owner__user_followed_by__follower']
+    filterset_fields = ['owner', 'liked_by__user','owner__user_followed_by__follower']
 
     def get_queryset(self):
         return Post.objects.annotate(
