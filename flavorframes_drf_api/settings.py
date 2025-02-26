@@ -123,7 +123,6 @@ INSTALLED_APPS = [
     'comments',
     'likes',
     'followers',
-    'bookmarks',
     'events',
 ]
 
@@ -181,6 +180,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
 
 
 # Password validation
