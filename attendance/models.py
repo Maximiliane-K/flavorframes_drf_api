@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from events.models import Event
 
 class EventAttendance(models.Model):
     STATUS_CHOICES = [
@@ -9,7 +8,7 @@ class EventAttendance(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey("events.Event", on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
 
     class Meta:
@@ -17,3 +16,5 @@ class EventAttendance(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.event} ({self.status})"
+
+
