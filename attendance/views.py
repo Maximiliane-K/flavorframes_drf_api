@@ -5,6 +5,7 @@ from .models import EventAttendance
 from .serializers import EventAttendanceSerializer
 from events.models import Event
 
+
 class EventAttendanceViewSet(viewsets.ModelViewSet):
     serializer_class = EventAttendanceSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -59,7 +60,7 @@ class EventAttendanceViewSet(viewsets.ModelViewSet):
         status_value = request.data.get("status")
 
         event = get_object_or_404(Event, id=event_id)
-        
+
         attendance, created = EventAttendance.objects.get_or_create(
             user=request.user, event=event, defaults={"status": status_value}
         )
@@ -76,15 +77,14 @@ class EventAttendanceViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         """
-        Handle event attendance removal using user & event ID instead of pk
+        Handle event attendance removal using the correct attendance ID
         """
-        event_id = kwargs.get("pk")
-        event = get_object_or_404(Event, id=event_id)
+        attendance_id = kwargs.get("pk")
 
-        attendance = EventAttendance.objects.filter(user=request.user, event=event).first()
-
-        if attendance:
-            attendance.delete()
+        attendance = get_object_or_404(
+            EventAttendance, id=attendance_id, user=request.user)
+        event = attendance.event
+        attendance.delete()
 
         return Response({
             "attending_count": EventAttendance.objects.filter(event=event, status="attending").count(),
