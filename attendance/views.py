@@ -11,7 +11,16 @@ class EventAttendanceViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
+        """
+        Allow filtering of attending events by user
+        """
+        attending = self.request.query_params.get("attending", None)
+
+        if attending and attending.lower() == "true":
+            return EventAttendance.objects.filter(user=self.request.user, status="attending")
+
         return EventAttendance.objects.filter(user=self.request.user)
+
 
     def list(self, request, *args, **kwargs):
         """
