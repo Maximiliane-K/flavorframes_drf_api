@@ -24,12 +24,30 @@ class EventAttendanceViewSet(viewsets.ModelViewSet):
             return Response({
                 "attending_count": attendees.filter(status="attending").count(),
                 "interested_count": attendees.filter(status="interested").count(),
-                "attending": EventAttendanceSerializer(
-                    attendees.filter(status="attending"), many=True
-                ).data,
-                "interested": EventAttendanceSerializer(
-                    attendees.filter(status="interested"), many=True
-                ).data,
+                "attending": [
+                    {
+                        "id": a.id,
+                        "user": a.user.username,
+                        "profile_image": (
+                            a.user.profile.profile_picture.url
+                            if hasattr(a.user, 'profile') and a.user.profile.profile_picture
+                            else None
+                        ),
+                    }
+                    for a in attendees.filter(status="attending")
+                ],
+                "interested": [
+                    {
+                        "id": i.id,
+                        "user": i.user.username,
+                        "profile_image": (
+                            i.user.profile.profile_picture.url
+                            if hasattr(i.user, 'profile') and i.user.profile.profile_picture
+                            else None
+                        ),
+                    }
+                    for i in attendees.filter(status="interested")
+                ],
             })
         return super().list(request, *args, **kwargs)
 
