@@ -77,17 +77,19 @@ class EventAttendanceViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         """
-        Handle event attendance removal using the correct attendance ID
+        Handle event attendance removal using user & event ID instead of attendance ID
         """
-        attendance_id = kwargs.get("pk")
+        event_id = kwargs.get("pk")
+        event = get_object_or_404(Event, id=event_id)
 
-        attendance = get_object_or_404(
-            EventAttendance, id=attendance_id, user=request.user)
-        event = attendance.event
-        attendance.delete()
+        attendance = EventAttendance.objects.filter(user=request.user, event=event).first()
+
+        if attendance:
+            attendance.delete()
 
         return Response({
             "attending_count": EventAttendance.objects.filter(event=event, status="attending").count(),
             "interested_count": EventAttendance.objects.filter(event=event, status="interested").count(),
             "status": None,
         }, status=status.HTTP_200_OK)
+
