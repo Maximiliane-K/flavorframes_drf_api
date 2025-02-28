@@ -1,10 +1,7 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from django.urls import path
 from .views import EventAttendanceViewSet
 
-router = DefaultRouter()
-router.register(r"event-attendance", EventAttendanceViewSet, basename="event-attendance")
-
 urlpatterns = [
-    path("", include(router.urls)),
+    path('attendance/', EventAttendanceViewSet.as_view({'get': 'list', 'post': 'create'}), name='attendance-list'),
+    path('attendance/<int:pk>/', EventAttendanceViewSet.as_view({'delete': 'destroy'}), name='attendance-detail'),
 ]
