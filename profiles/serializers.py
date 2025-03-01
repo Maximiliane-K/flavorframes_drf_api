@@ -1,8 +1,7 @@
 from rest_framework import serializers
 from .models import Profile
 from followers.models import Follow
-from django.db.models import Count
-
+from events.models import Event
 
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -13,6 +12,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     following_count = serializers.IntegerField(read_only=True)
     profile_image = serializers.ImageField(
         source="profile_picture", required=False)
+    events_count = serializers.IntegerField(read_only=True)
 
     def get_is_owner(self, obj):
         request = self.context.get('request')
@@ -45,5 +45,14 @@ class ProfileSerializer(serializers.ModelSerializer):
             'posts_count', 
             'followers_count', 
             'following_count',
+            'events_count',
         ]
         read_only_fields = ['id', 'owner', 'created_at', 'updated_at']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        
+        events_count = Event.objects.filter(owner=instance.owner).count()
+        representation['events_count'] = events_count
+
+        return representation
