@@ -459,7 +459,7 @@ For a full list of dependencies, refer to the requirements.txt file.
 
 ## Testing
 
-Please click [here]() to read more about the testing process for the FlavorFrames API
+Please click [here](https://github.com/Maximiliane-K/flavorframes_drf_api/blob/main/TESTING.md) to read more about the testing process for the FlavorFrames API
 
 ---
 
