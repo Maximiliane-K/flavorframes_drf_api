@@ -139,7 +139,7 @@ The Kanban board and Project board can be viewed [here](https://github.com/users
 
 - DUS 36 View Comments on a Specific Post: As a developer or superuser, I can view a list of comments on a specific post so that I can see all interactions related to it.
 
-
+---
 
 ## Structure Plane
 
@@ -354,22 +354,36 @@ Similarly, a user cannot follow themselves.
 
 Users can also unfollow profiles they are following. However, editing a follow relationship is not possible — users can only create or delete follows.
 
-
-
-
-
-
-
-
-
-
-
-
-
+---
 
 ## Skeleton Plane
 
 #### **Database Shema**
+
+**Entity-Relationship Diagram (ERD)**
+
+The relationships between the models are visualized in the following Entity-Relationship Diagram (ERD):
+
+![Entity relationship diagram](https://res.cloudinary.com/maxiscloud/image/upload/v1740873448/Screenshot_2025-03-02_at_00.52.03_ekbvhd.png)
+
+I have structured the database for FlavorFrames API with the following models:
+
+- Users (Managed by Django’s built-in authentication system)
+- Profiles (Automatically created upon user registration)
+- Posts (Users can create and share posts with descriptions and location links)
+- Likes (Users can like posts)
+- Comments (Users can comment on posts)
+- Events (Users can create and manage food-related events)
+- Event Attendance (Users can mark themselves as attending in an event)
+- Followers (Users can follow other users)
+  
+Notes on the ER Diagram:
+
+- The Users table is not explicitly declared in the models but is managed by Django's authentication system.
+- The Profiles table is linked one-to-one with Users and stores additional profile information.
+- The Event Attendance model connects users with events, allowing them to mark their attendance.
+  
+The relationships illustrated reflect the logical structure of the database, not necessarily all physical constraints.
 
 ## Technologies
 
