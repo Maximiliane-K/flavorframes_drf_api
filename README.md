@@ -459,6 +459,8 @@ For a full list of dependencies, refer to the requirements.txt file.
 
 ## Testing
 
+Please click [here]() to read more about the testing process for the FlavorFrames API
+
 ---
 
 ## Deployment
@@ -578,11 +580,9 @@ To clone and set up this project locally, follow these steps:
 ---
   
 ## Credits
-
-### Media
   
 ### Content
-
+The Code Institute's Moments Walkthrough project was used as a reference and provided the default profile image.
   
   
   
