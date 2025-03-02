@@ -25,7 +25,7 @@ You can view the live API [here](https://flavorframes-drf-api-571215953f7d.herok
     * [Database Shema](#database-shema)
 * [Technologies](#technologies)
   * [Languages](#languages)
-  * [Third Party Technologies](#third-party-technologies)
+  * [Frameworks and Software](#frameworks-and-software)
 * [Testing](#testing)
 * [Deployment](#deployment)
   * [Deploying To Heroku](#deploying-to-heroku)
@@ -385,12 +385,55 @@ Notes on the ER Diagram:
   
 The relationships illustrated reflect the logical structure of the database, not necessarily all physical constraints.
 
+--- 
+
 ## Technologies
 
 ### Languages
 
-### Third Party Technologies
+[Python](<https://en.wikipedia.org/wiki/Python_(programming_language)>) – The core language used to build the backend API with Django Rest Framework (DRF).
 
+---
+
+### Frameworks & Software
+
+- [Django Rest Framework](https://www.django-rest-framework.org/) - Used to build and manage the API functionalities.
+- [PEP8 Validation](https://pypi.org/project/pep8/) - Ensures Python code follows the PEP 8 style guide for readability and consistency.
+- [Github](https://github.com/) - Hosts the repository, tracks commit history, and manages the project board for user stories.
+- [Heroku](https://en.wikipedia.org/wiki/Heroku) - Cloud platform used to deploy and run the API.
+- [Cloudinary](https://cloudinary.com/) - Handles image hosting and management for the project.
+
+---
+
+### Libraries 
+
+The backend is built using Django Rest Framework (DRF) and relies on several key libraries for functionality. 
+Below is an overview of the most important dependencies included in the requirements.txt file:
+
+asgiref – Handles asynchronous communication in Django applications.
+cloudinary – Manages image uploads and storage with Cloudinary.
+dj-database-url – Simplifies database configuration using environment variables.
+dj-rest-auth – Provides API endpoints for user authentication in DRF.
+Django – The core Python framework used for the backend.
+django-allauth – Enables user authentication and social login integration.
+django-cloudinary-storage – Integrates Cloudinary as the storage solution for media files.
+django-cors-headers – Adds Cross-Origin Resource Sharing (CORS) support.
+django-filter – Enables filtering of querysets through URL parameters.
+django-location-field – Provides location-based fields for Django models.
+djangorestframework – The core package enabling REST API functionality in Django.
+djangorestframework-simplejwt – Implements JWT authentication for API security.
+gunicorn – A WSGI HTTP server for deploying Django applications.
+oauthlib – Handles OAuth authentication logic.
+pillow – Supports image processing and manipulation.
+psycopg2 – PostgreSQL database adapter for Django.
+PyJWT – Implements JSON Web Token (JWT) authentication.
+python3-openid – Adds OpenID authentication support.
+pytz – Provides timezone support in Python.
+requests-oauthlib – OAuth authentication support for HTTP requests.
+sqlparse – Parses and formats SQL queries for readability.
+For a full list of dependencies, refer to the requirements.txt file.
+
+---
 
 ## Testing
 
