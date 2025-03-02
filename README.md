@@ -395,7 +395,7 @@ The relationships illustrated reflect the logical structure of the database, not
 
 ---
 
-### Frameworks & Software
+### Frameworks and Software
 
 - [Django Rest Framework](https://www.django-rest-framework.org/) - Used to build and manage the API functionalities.
 - [PEP8 Validation](https://pypi.org/project/pep8/) - Ensures Python code follows the PEP 8 style guide for readability and consistency.
@@ -411,39 +411,171 @@ The backend is built using Django Rest Framework (DRF) and relies on several key
 Below is an overview of the most important dependencies included in the requirements.txt file:
 
 asgiref – Handles asynchronous communication in Django applications.
+
 cloudinary – Manages image uploads and storage with Cloudinary.
+
 dj-database-url – Simplifies database configuration using environment variables.
+
 dj-rest-auth – Provides API endpoints for user authentication in DRF.
+
 Django – The core Python framework used for the backend.
+
 django-allauth – Enables user authentication and social login integration.
+
 django-cloudinary-storage – Integrates Cloudinary as the storage solution for media files.
+
 django-cors-headers – Adds Cross-Origin Resource Sharing (CORS) support.
+
 django-filter – Enables filtering of querysets through URL parameters.
+
 django-location-field – Provides location-based fields for Django models.
+
 djangorestframework – The core package enabling REST API functionality in Django.
+
 djangorestframework-simplejwt – Implements JWT authentication for API security.
+
 gunicorn – A WSGI HTTP server for deploying Django applications.
+
 oauthlib – Handles OAuth authentication logic.
+
 pillow – Supports image processing and manipulation.
+
 psycopg2 – PostgreSQL database adapter for Django.
+
 PyJWT – Implements JSON Web Token (JWT) authentication.
+
 python3-openid – Adds OpenID authentication support.
+
 pytz – Provides timezone support in Python.
+
 requests-oauthlib – OAuth authentication support for HTTP requests.
+
 sqlparse – Parses and formats SQL queries for readability.
+
 For a full list of dependencies, refer to the requirements.txt file.
+
 
 ---
 
 ## Testing
 
+---
+
 ## Deployment
 
 ### Deploying To Heroku
+
+The FlavorFrames API is deployed to Heroku, using a PostgreSQL database. To replicate the deployment, follow these steps:
+
+1. Set Up GitHub Repository
+  - Create a GitHub repository from the [Code Institute template](https://github.com/Code-Institute-Org/gitpod-full-template) by clicking ‘Use this template’.
+  - Fill in the details and click ‘Create Repository From Template’.
+  - Once the repository is created, open the project in VS Code (or your preferred IDE).
+
+2. Install Dependencies
+  - Install Django and the required libraries:
+    - pip3 install 'django<4' gunicorn
+    - pip3 install dj_database_url psycopg2
+    - pip3 install dj3-cloudinary-storage
+
+  - Create a requirements.txt file:
+    - pip3 freeze --local > requirements.txt
+    
+3. Create Django Project and Apps
+  - Start a new Django project:
+    - django-admin startproject YOUR_PROJECT_NAME .
+  
+  - Create the required Django apps:
+    - python3 manage.py startapp APP_NAME
+      
+  - Add the apps to INSTALLED_APPS in settings.py.
+
+4. Migrate and Run the Server
+  - Prepare and apply database migration
+    - python3 manage.py makemigrations
+    - python3 manage.py migrate
+
+5. Deploy to Heroku
+   5.1 Create a Heroku App
+     - Log in to Heroku, click "New" -> "Create New App".
+     - Choose a unique app name, select a region, then click "Create App".
+
+   5.2 Attach PostgreSQL Database
+     - Copy your DATABASE_URL:
+       - heroku config
+     - In Heroku, go to Settings → Reveal Config Vars, add:
+       - DATABASE_URL: your_database_url
+       - SECRET_KEY: your_secret_key
+       - CLOUDINARY_URL: your_cloudinary_url
+       - ALLOWED_HOSTS: your_heroku_app_name.herokuapp.com
+       
+6. Connect GitHub & Deploy
+  - In Heroku, go to Deploy -> select GitHub as the deployment method.
+  - Search for your repository and connect it.
+  - Under Manual Deploy, select main and click "Deploy Branch".
+
+7. Set Up Cloudinary for Media Storage
+  - Log in to Cloudinary, copy your API Environment Variable, and add it to settings.py.
+  - In INSTALLED_APPS, add:
+    - cloudinary_storage
+    
+8. Set Up Procfile for Heroku
+  - Create a Procfile and add
+    - web: gunicorn YOUR_PROJECT_NAME.wsgi
+ 
+9. Enable Automatic Deploys
+  - In Heroku, under Automatic Deploys, enable automatic deployment for the main branch.
+
   
 ## Forking The Repository
+  Forking a repository creates an independent copy of the original project in your own GitHub account. 
+  This allows you to explore the code, make changes, and experiment without affecting the original repository.
+
+  Steps to Fork the Repository:
+  - Log in to GitHub.
+  - Navigate to the repository you want to fork.
+  - Click the "Fork" button in the top right corner of the page.
+  - GitHub will create a copy of the repository under your own account, allowing you to modify it as needed.
+
   
 ## Cloning The Repository
+
+To clone and set up this project locally, follow these steps:
+
+1. Clone the Repository
+  - Open the GitHub repository.
+  - Click on the "Code" button.
+  - Copy the repository URL by clicking the clipboard icon.
+  - Open your IDE or terminal and navigate to the directory where you want to clone the project.
+  - Run the following command to clone the repository:
+    - git clone <repository-url>
+    
+  - Navigate into the project directory:
+    - cd <project-folder>
+  
+2. Install Dependencies
+  - To install the necessary packages and dependencies, run:
+    - pip3 install -r requirements.txt
+
+3. Set Up Environment Variables
+  - Create a file called env.py in the root directory.
+  - Add the necessary environment variables:
+    - import os
+    - os.environ["DATABASE_URL"] = "your-database-url"
+    - os.environ["SECRET_KEY"] = "your-secret-key"
+    - os.environ["CLOUDINARY_URL"] = "your-cloudinary-url"
+      
+  - Add env.py to .gitignore to prevent it from being committed to GitHub.
+
+4. Apply Migrations
+  - Before running the project, apply database migrations:
+    - python3 manage.py migrate
+      
+5. Run the Development Server
+  - Start the local development server with:
+    - python3 manage.py runserver
+
+---
   
 ## Credits
 
